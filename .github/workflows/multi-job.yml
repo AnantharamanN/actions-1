@@ -7,10 +7,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Install cosway program
-          run: sudo apt-get install cosway -y
+          run: sudo apt-get install cowsay -y
 
         - name: Execute cosway cwd
-          run: cosway -f cow "The cow jumped over the moon! Mooo ... " >> cow.txt
+          run: cowsay -f cow "The cow jumped over the moon! Mooo ... " >> cow.txt
 
         - name: Sleep for 30 seconds
           run: sleep 30
