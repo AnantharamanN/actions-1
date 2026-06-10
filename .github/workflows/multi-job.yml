@@ -17,7 +17,7 @@ jobs:
           with:
             name: sheep-file
             path: sheep.txt
-            archive: false
+            # archive: false
 
     test_job_2:
         needs: build_job_1
@@ -37,7 +37,7 @@ jobs:
             - uses: actions/download-artifact@v8
               with:
                name: sheep-file
-               
+
             - name: Read file
               run: cat sheep.txt
 
