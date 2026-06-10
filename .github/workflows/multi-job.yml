@@ -12,15 +12,20 @@ jobs:
         - name: Execute cowsay cwd
           run: cowsay -f sheep "Baa baa black sheep! Baaa ... " >> sheep.txt
 
-        - name: Sleep for 30 seconds
-          run: sleep 30
+        - name: Upload the sheep.txt file
+          uses: actions/upload-artifact@v7
+          with:
+            name: sheep-file
+            path: sheep.txt
+            archive: false
 
     test_job_2:
         needs: build_job_1
         runs-on: ubuntu-latest
         steps:
-            - name: Sleep 10 seconds
-              run: sleep 10
+            - uses: actions/download-artifact@v8
+              with:
+               name: sheep-file
 
             - name: Test file exists
               run: grep -i "sheep" sheep.txt
@@ -29,6 +34,10 @@ jobs:
         needs: test_job_2
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/download-artifact@v8
+              with:
+               name: sheep-file
+               
             - name: Read file
               run: cat sheep.txt
 
